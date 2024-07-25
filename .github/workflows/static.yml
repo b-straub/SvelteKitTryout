@@ -20,11 +20,6 @@ concurrency:
   group: 'pages'
   cancel-in-progress: true
 
-defaults:
-  run:
-    shell: bash
-    working-directory: ./test-app
-
 jobs:
   # Single deploy job since we're just deploying
   deploy:
@@ -32,6 +27,9 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: 'test-app'
     steps:
       - name: Checkout
         uses: actions/checkout@v4
